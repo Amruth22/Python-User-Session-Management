@@ -36,25 +36,25 @@ def demo_session_management():
     manager = SessionManager(db_path, session_timeout=3600)
     
     # Create session
-    print("\n📝 Creating session for user 1...")
+    print("\n[EMOJI] Creating session for user 1...")
     session_id = manager.create_session(user_id=1, ip_address='192.168.1.100')
-    print(f"   ✅ Session created: {session_id[:20]}...")
+    print(f"   [EMOJI] Session created: {session_id[:20]}...")
     
     # Get session
     session = manager.get_session(session_id)
-    print(f"   ✅ Session retrieved: User {session['user_id']}")
+    print(f"   [EMOJI] Session retrieved: User {session['user_id']}")
     
     # Set session data
     manager.set_session_data(session_id, 'cart', {'items': ['Laptop'], 'total': 999.99})
-    print("   ✅ Session data stored")
+    print("   [EMOJI] Session data stored")
     
     # Get session data
     cart = manager.get_session_data(session_id, 'cart')
-    print(f"   ✅ Session data retrieved: {cart}")
+    print(f"   [EMOJI] Session data retrieved: {cart}")
     
     # Get stats
     stats = manager.get_session_stats()
-    print(f"\n📊 Session Stats:")
+    print(f"\n[EMOJI] Session Stats:")
     print(f"   Active sessions: {stats['active_sessions']}")
 
 
@@ -67,20 +67,20 @@ def demo_activity_tracking():
     event_logger = EventLogger(tracker)
     
     # Track events
-    print("\n📊 Tracking user activities...")
+    print("\n[EMOJI] Tracking user activities...")
     
     event_logger.log_login(user_id=1, session_id='session123', ip_address='192.168.1.100')
-    print("   ✅ Login tracked")
+    print("   [EMOJI] Login tracked")
     
     event_logger.log_page_view(user_id=1, page='/dashboard', session_id='session123')
-    print("   ✅ Page view tracked")
+    print("   [EMOJI] Page view tracked")
     
     event_logger.log_action(user_id=1, action='button_click', details={'button': 'submit'}, session_id='session123')
-    print("   ✅ Action tracked")
+    print("   [EMOJI] Action tracked")
     
     # Get activities
     activities = tracker.get_user_activities(user_id=1, limit=10)
-    print(f"\n📋 User Activities: {len(activities)} events")
+    print(f"\n[EMOJI] User Activities: {len(activities)} events")
     
     for activity in activities[:3]:
         print(f"   - {activity['event_type']}")
@@ -94,7 +94,7 @@ def demo_user_analytics():
     analytics = UserAnalytics(db_path)
     
     # Get user summary
-    print("\n📊 User Analytics Summary:")
+    print("\n[EMOJI] User Analytics Summary:")
     summary = analytics.get_user_summary(user_id=1)
     
     print(f"   Total Activities: {summary['total_activities']}")
@@ -114,7 +114,7 @@ def demo_behavioral_tracking():
     tracker = BehavioralTracker(db_path)
     
     # Get user journey
-    print("\n🗺️  User Journey:")
+    print("\n[EMOJI]️  User Journey:")
     journey = tracker.get_user_journey(user_id=1)
     
     print(f"   Total steps: {len(journey)}")
@@ -122,7 +122,7 @@ def demo_behavioral_tracking():
         print(f"   {i}. {step['event_type']}")
     
     # Get common patterns
-    print("\n📊 Common Patterns:")
+    print("\n[EMOJI] Common Patterns:")
     patterns = tracker.get_common_patterns(limit=5)
     
     for pattern in patterns:
@@ -137,18 +137,18 @@ def demo_user_preferences():
     pref_manager = PreferenceManager(db_path)
     
     # Get default preferences
-    print("\n⚙️  Default Preferences:")
+    print("\n[EMOJI]️  Default Preferences:")
     prefs = pref_manager.get_preferences(user_id=1)
     print(f"   Theme: {prefs['theme']}")
     print(f"   Language: {prefs['language']}")
     print(f"   Notifications: {prefs['notifications']}")
     
     # Update preference
-    print("\n📝 Updating preferences...")
+    print("\n[EMOJI] Updating preferences...")
     pref_manager.update_preference(user_id=1, 'theme', 'dark')
     
     updated_prefs = pref_manager.get_preferences(user_id=1)
-    print(f"   ✅ Theme updated to: {updated_prefs['theme']}")
+    print(f"   [EMOJI] Theme updated to: {updated_prefs['theme']}")
 
 
 def demo_gdpr_compliance():
@@ -159,19 +159,19 @@ def demo_gdpr_compliance():
     gdpr = GDPRHandler(db_path)
     
     # Record consent
-    print("\n📝 Recording user consent...")
+    print("\n[EMOJI] Recording user consent...")
     gdpr.record_consent(user_id=1, consent_type='analytics', granted=True)
     gdpr.record_consent(user_id=1, consent_type='marketing', granted=False)
-    print("   ✅ Consent recorded")
+    print("   [EMOJI] Consent recorded")
     
     # Get consent
     analytics_consent = gdpr.get_consent(user_id=1, 'analytics')
     print(f"   Analytics consent: {analytics_consent}")
     
     # Export user data
-    print("\n📦 Exporting user data (Right to Access)...")
+    print("\n[EMOJI] Exporting user data (Right to Access)...")
     export = gdpr.export_user_data(user_id=1)
-    print(f"   ✅ Data exported:")
+    print(f"   [EMOJI] Data exported:")
     print(f"      Sessions: {len(export['sessions'])}")
     print(f"      Activities: {len(export['activities'])}")
     print(f"      Preferences: {len(export['preferences'])} settings")
@@ -184,13 +184,13 @@ def demo_data_retention():
     db_path = 'demo.db'
     retention = DataRetentionPolicy(db_path, retention_days=90)
     
-    print(f"\n🗑️  Data Retention Policy: {retention.retention_days} days")
+    print(f"\n[EMOJI]️  Data Retention Policy: {retention.retention_days} days")
     print("\n   Applying retention policy...")
     
     summary = retention.apply_retention_policy()
     
-    print(f"   ✅ Activities deleted: {summary['activities_deleted']}")
-    print(f"   ✅ Sessions deleted: {summary['sessions_deleted']}")
+    print(f"   [EMOJI] Activities deleted: {summary['activities_deleted']}")
+    print(f"   [EMOJI] Sessions deleted: {summary['sessions_deleted']}")
 
 
 def main():
@@ -230,7 +230,7 @@ def main():
             os.remove('demo.db')
         
     except Exception as e:
-        print(f"\n❌ Error: {e}")
+        print(f"\n[EMOJI] Error: {e}")
         import traceback
         traceback.print_exc()
 

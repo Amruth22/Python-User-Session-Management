@@ -50,14 +50,14 @@ class UserSessionManagementTestCase(unittest.TestCase):
         session_id = manager.create_session(user_id=1, ip_address='192.168.1.100')
         
         self.assertIsNotNone(session_id)
-        print(f"   ✅ Session created: {session_id[:20]}...")
+        print(f"   [EMOJI] Session created: {session_id[:20]}...")
         
         # Retrieve session
         session = manager.get_session(session_id)
         
         self.assertIsNotNone(session)
         self.assertEqual(session['user_id'], 1)
-        print(f"   ✅ Session retrieved for user {session['user_id']}")
+        print(f"   [EMOJI] Session retrieved for user {session['user_id']}")
     
     # Test 2: Session Expiration
     def test_02_session_expiration(self):
@@ -71,14 +71,14 @@ class UserSessionManagementTestCase(unittest.TestCase):
         
         # Should be valid immediately
         self.assertTrue(manager.validate_session(session_id))
-        print("   ✅ Session valid immediately after creation")
+        print("   [EMOJI] Session valid immediately after creation")
         
         # Wait for expiration
         time.sleep(1.5)
         
         # Should be expired
         self.assertFalse(manager.validate_session(session_id))
-        print("   ✅ Session expired after timeout")
+        print("   [EMOJI] Session expired after timeout")
     
     # Test 3: Activity Tracking
     def test_03_activity_tracking(self):
@@ -92,18 +92,18 @@ class UserSessionManagementTestCase(unittest.TestCase):
         tracker.track_event(user_id=1, event_type='page_view', event_data={'page': '/dashboard'})
         tracker.track_event(user_id=1, event_type='button_click', event_data={'button': 'submit'})
         
-        print("   ✅ 3 events tracked")
+        print("   [EMOJI] 3 events tracked")
         
         # Get activities
         activities = tracker.get_user_activities(user_id=1)
         
         self.assertGreaterEqual(len(activities), 3)
-        print(f"   ✅ Retrieved {len(activities)} activities")
+        print(f"   [EMOJI] Retrieved {len(activities)} activities")
         
         # Get count
         count = tracker.get_activity_count(user_id=1)
         self.assertGreaterEqual(count, 3)
-        print(f"   ✅ Activity count: {count}")
+        print(f"   [EMOJI] Activity count: {count}")
     
     # Test 4: Session State Management
     def test_04_session_state_management(self):
@@ -117,14 +117,14 @@ class UserSessionManagementTestCase(unittest.TestCase):
         
         # Set data
         manager.set_session_data(session_id, 'cart', {'items': ['Product1'], 'total': 99.99})
-        print("   ✅ Session data stored")
+        print("   [EMOJI] Session data stored")
         
         # Get data
         cart = manager.get_session_data(session_id, 'cart')
         
         self.assertIsNotNone(cart)
         self.assertEqual(cart['total'], 99.99)
-        print(f"   ✅ Session data retrieved: {cart}")
+        print(f"   [EMOJI] Session data retrieved: {cart}")
     
     # Test 5: User Analytics
     def test_05_user_analytics(self):
@@ -139,9 +139,9 @@ class UserSessionManagementTestCase(unittest.TestCase):
         self.assertIn('total_activities', summary)
         self.assertIn('total_sessions', summary)
         
-        print(f"   ✅ User summary generated")
-        print(f"   ✅ Total activities: {summary['total_activities']}")
-        print(f"   ✅ Total sessions: {summary['total_sessions']}")
+        print(f"   [EMOJI] User summary generated")
+        print(f"   [EMOJI] Total activities: {summary['total_activities']}")
+        print(f"   [EMOJI] Total sessions: {summary['total_sessions']}")
     
     # Test 6: Behavioral Tracking
     def test_06_behavioral_tracking(self):
@@ -154,13 +154,13 @@ class UserSessionManagementTestCase(unittest.TestCase):
         journey = tracker.get_user_journey(user_id=1)
         
         self.assertIsInstance(journey, list)
-        print(f"   ✅ User journey retrieved: {len(journey)} steps")
+        print(f"   [EMOJI] User journey retrieved: {len(journey)} steps")
         
         # Get common patterns
         patterns = tracker.get_common_patterns(limit=5)
         
         self.assertIsInstance(patterns, list)
-        print(f"   ✅ Common patterns: {len(patterns)} patterns")
+        print(f"   [EMOJI] Common patterns: {len(patterns)} patterns")
     
     # Test 7: User Preferences
     def test_07_user_preferences(self):
@@ -174,14 +174,14 @@ class UserSessionManagementTestCase(unittest.TestCase):
         
         self.assertIn('theme', prefs)
         self.assertIn('language', prefs)
-        print(f"   ✅ Default preferences loaded")
+        print(f"   [EMOJI] Default preferences loaded")
         
         # Update preference
         pref_manager.update_preference(user_id=1, 'theme', 'dark')
         
         updated_prefs = pref_manager.get_preferences(user_id=1)
         self.assertEqual(updated_prefs['theme'], 'dark')
-        print(f"   ✅ Preference updated: theme = {updated_prefs['theme']}")
+        print(f"   [EMOJI] Preference updated: theme = {updated_prefs['theme']}")
     
     # Test 8: GDPR Data Export
     def test_08_gdpr_data_export(self):
@@ -197,9 +197,9 @@ class UserSessionManagementTestCase(unittest.TestCase):
         self.assertIn('activities', export)
         self.assertIn('preferences', export)
         
-        print(f"   ✅ User data exported")
-        print(f"   ✅ Sessions: {len(export['sessions'])}")
-        print(f"   ✅ Activities: {len(export['activities'])}")
+        print(f"   [EMOJI] User data exported")
+        print(f"   [EMOJI] Sessions: {len(export['sessions'])}")
+        print(f"   [EMOJI] Activities: {len(export['activities'])}")
     
     # Test 9: GDPR Data Deletion
     def test_09_gdpr_data_deletion(self):
@@ -220,9 +220,9 @@ class UserSessionManagementTestCase(unittest.TestCase):
         self.assertGreaterEqual(summary['sessions_deleted'], 0)
         self.assertGreaterEqual(summary['activities_deleted'], 0)
         
-        print(f"   ✅ User data deleted")
-        print(f"   ✅ Sessions deleted: {summary['sessions_deleted']}")
-        print(f"   ✅ Activities deleted: {summary['activities_deleted']}")
+        print(f"   [EMOJI] User data deleted")
+        print(f"   [EMOJI] Sessions deleted: {summary['sessions_deleted']}")
+        print(f"   [EMOJI] Activities deleted: {summary['activities_deleted']}")
     
     # Test 10: Data Retention
     def test_10_data_retention(self):
@@ -237,8 +237,8 @@ class UserSessionManagementTestCase(unittest.TestCase):
         self.assertIn('activities_deleted', summary)
         self.assertIn('sessions_deleted', summary)
         
-        print(f"   ✅ Retention policy applied")
-        print(f"   ✅ Retention period: {summary['retention_days']} days")
+        print(f"   [EMOJI] Retention policy applied")
+        print(f"   [EMOJI] Retention period: {summary['retention_days']} days")
 
 
 def run_tests():
@@ -264,17 +264,17 @@ def run_tests():
         print(f"Success rate: {success_rate:.1f}%")
     
     if result.failures:
-        print("\n❌ FAILURES:")
+        print("\n[EMOJI] FAILURES:")
         for test, traceback in result.failures:
             print(f"  - {test}")
     
     if result.errors:
-        print("\n💥 ERRORS:")
+        print("\n[EMOJI] ERRORS:")
         for test, traceback in result.errors:
             print(f"  - {test}")
     
     if not result.failures and not result.errors:
-        print("\n🎉 ALL TESTS PASSED! 🎉")
+        print("\n[EMOJI] ALL TESTS PASSED! [EMOJI]")
     
     print("=" * 60)
     
@@ -289,10 +289,10 @@ if __name__ == "__main__":
         success = run_tests()
         exit(0 if success else 1)
     except KeyboardInterrupt:
-        print("\n\n⚠️  Tests interrupted by user")
+        print("\n\n[EMOJI]️  Tests interrupted by user")
         exit(1)
     except Exception as e:
-        print(f"\n\n💥 Unexpected error: {e}")
+        print(f"\n\n[EMOJI] Unexpected error: {e}")
         import traceback
         traceback.print_exc()
         exit(1)
